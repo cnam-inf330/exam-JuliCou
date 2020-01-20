@@ -10,15 +10,21 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Class for testing the Rover Mission Command Center application.
+ */
 public class RoverTest {
-
+    /**
+     * Initialize the MCC before the tests are run.
+     */
     @BeforeClass // This method is run only once, before the test methods are run
     public static void initMissionCommandCenter() {
         // TODO 1) Initialize MCC singleton instance before the test methods are run
     }
 
     /**
-     * Must catch an InvalidRoverPositionException if a rover has moved out of the grid
+     * Application must catch an InvalidRoverPositionException if a rover has moved out of the grid.
+     * Rover must pull back after moving out of the grid.
      */
     // TODO 5) Change this test to check that the rover pulls back after moving out of the grid
     @Test
@@ -44,7 +50,7 @@ public class RoverTest {
      */
 
     /**
-     * Must produce output data that matches the expected output after processing the input rover data
+     * Application must produce output data that matches the expected output after processing the input rover data.
      */
     @Test
     public void outputDataTest() throws IOException, URISyntaxException {

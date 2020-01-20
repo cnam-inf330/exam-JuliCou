@@ -37,7 +37,7 @@ public class MissionCommandCenter {
      * Process the rover data line by line.
      *
      * @param lines The lines representing the rover data to process
-     * @return
+     * @return The lines of output data describing the final positions of all managed Rovers.
      */
     public List<String> processRoverData(List<String> lines) {
         System.out.println("Processing rover data...");
@@ -78,7 +78,7 @@ public class MissionCommandCenter {
      * @param roverId              The ID of the rover to move
      * @param roverInitialPosition The rover's initial position data
      * @param roverInstructions    The data containing set of instructions to move the rover
-     * @return The Rover
+     * @return The newly deployed Rover at its final position
      */
     public Rover deployAndMoveRover(int roverId, String roverInitialPosition,
                                     String roverInstructions) {
@@ -112,7 +112,7 @@ public class MissionCommandCenter {
     /**
      * Check whether the rover's current position is valid.
      *
-     * @param rover The rover to validate
+     * @param rover The rover whose position must be checked
      * @throws InvalidRoverPositionException
      */
     public void checkRoverPosition(Rover rover) throws InvalidRoverPositionException {
@@ -127,31 +127,54 @@ public class MissionCommandCenter {
      * Compute the rover's coverage percent, which is defined by the ratio between the number of distinct positions
      * visited by the rover and the total number of positions on the exploration grid.
      *
-     * @param rover The rover to compute the coverage percent for
-     * @return
+     * @param rover The Rover whose coverage percent is computed
+     * @return The rover's coverage percent as a double
      */
     public double computeRoverCoveragePercent(Rover rover) {
         // TODO 6) Compute the rover's grid coverage percentage
         return 0d;
     }
 
+    /**
+     * Add a new rover to be managed by the MCC.
+     *
+     * @param rover The new Rover to manage
+     */
+    public void addRover(Rover rover) {
+        this.rovers.add(rover);
+    }
+
+    /**
+     * Remove all rovers from the the set of rovers managed by the MCC.
+     */
     public void clearRovers() {
         this.rovers.clear();
     }
 
+    /**
+     * Get the width (X axis) of the exploration grid.
+     *
+     * @return The width of the grid as an integer
+     */
     public int getGridWidth() {
         return gridWidth;
     }
 
+    /**
+     * Get the height (Y axis) of the exploration grid.
+     *
+     * @return The height of the grid as an integer
+     */
     public int getGridHeight() {
         return gridHeight;
     }
 
+    /**
+     * Get the list of rovers currently managed by the MCC.
+     *
+     * @return A list of Rovers
+     */
     public List<Rover> getRovers() {
         return rovers;
-    }
-
-    public void addRover(Rover rover) {
-        this.rovers.add(rover);
     }
 }
