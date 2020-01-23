@@ -129,7 +129,9 @@ public class Rover {
      * Move the Rover on its  previous positions on the grid.
      */
     public void moveBackward() {
+        // System.out.println("BEFORE " + this.listePos.size());
         this.listePos.remove(new Position(this.getX(), this.getY()));
+        // System.out.println("AFTER " + this.listePos.size());
         switch (o) {
             case N:
                 this.y = this.y - 1;
