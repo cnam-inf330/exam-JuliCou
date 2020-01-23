@@ -130,6 +130,11 @@ public class MissionCommandCenter {
         for (Character c : roverInstructions.toCharArray()) {
             rover.processCommand(RoverCommand.valueOf(String.valueOf(c)));
             // TODO 4) a) Make the rover pull back if the move is invalid
+            try {
+                checkRoverPosition(rover);
+            } catch (InvalidRoverPositionException e) {
+                rover.moveBackward();
+            }
         }
 
         System.out.println("Terminated communication with rover " + roverId + ".");
