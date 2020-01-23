@@ -173,7 +173,10 @@ public class MissionCommandCenter {
      */
     public double computeRoverCoveragePercent(Rover rover) {
         // TODO 6) Compute the rover's grid coverage percentage
-        return 0d;
+        double nb = rover.getListePos().size();
+        double nbT = this.gridWidth * this.gridHeight;
+
+        return nb/nbT*100;
     }
 
     /**

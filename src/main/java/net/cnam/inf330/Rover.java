@@ -1,5 +1,8 @@
 package net.cnam.inf330;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Class which represents a Rover deployed on the Mars exploration grid.
  */
@@ -9,6 +12,7 @@ public class Rover {
     private int x;
     private int y;
     private Orientation o;
+    private Set<Position> listePos = new HashSet<>();
 
     /**
      * Create a Rover at a specified location and orientation on the grid.
@@ -23,6 +27,8 @@ public class Rover {
         this.x = x;
         this.y = y;
         this.o = o;
+        this.listePos.add(new Position(x, y));
+        // listePos Set which contains all the visited positions of the rover (unique)
     }
 
     /**
@@ -116,12 +122,14 @@ public class Rover {
                 break;
             default:
         }
+        this.listePos.add(new Position(this.getX(), this.getY()));
     }
 
     /**
      * Move the Rover on its  previous positions on the grid.
      */
     public void moveBackward() {
+        this.listePos.remove(new Position(this.getX(), this.getY()));
         switch (o) {
             case N:
                 this.y = this.y - 1;
@@ -170,4 +178,13 @@ public class Rover {
     public Orientation getO() {
         return o;
     }
+
+    /**
+     * Get the Rover's unique positions
+     * @return The Rover's list of unique positions
+     */
+    public Set<Position> getListePos(){
+        return this.listePos;
+    }
+
 }
