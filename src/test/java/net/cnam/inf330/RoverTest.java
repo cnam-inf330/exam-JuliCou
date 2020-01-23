@@ -40,6 +40,23 @@ public class RoverTest {
         ThrowingRunnable tr = () -> mcc.checkRoverPosition(rover);
         assertThrows(InvalidRoverPositionException.class, tr);
 
+        // Previous position
+        rover.moveBackward();
+        assertEquals(rover.getX(), 0);
+        assertEquals(rover.getY(), 1);
+
+        mcc.clearRovers();
+    }
+
+    // TODO 5) Change this test to check that the rover pulls back after moving out of the grid
+    // Nouveau test avec deployAndMoveRover
+    @Test
+    public void testRoverOutOfGridExceptionBack() {
+        MissionCommandCenter mcc = MissionCommandCenter.getInstance();
+        Rover rover = mcc.deployAndMoveRover(1, "0 0 N", "MM");
+
+        assertEquals(rover.getY(), 1);
+
         mcc.clearRovers();
     }
 
@@ -51,18 +68,50 @@ public class RoverTest {
     public void testRoverPositionTaken() {
         // TO DO 3)
         MissionCommandCenter mcc = MissionCommandCenter.getInstance();
-        Rover rover1 = new Rover(1, 0, 0, Orientation.N);
+        Rover rover1 = new Rover(1, 0, 1, Orientation.N);
         Rover rover2 = new Rover(2, 0, 0, Orientation.N);
         mcc.addRover(rover1);
         mcc.addRover(rover2);
+        rover2.moveForward();
 
         ThrowingRunnable tr = () -> mcc.checkRoverPosition(rover2);
         assertThrows(InvalidRoverPositionException.class, tr);
+
+        // TO DO 5)
+        rover2.moveBackward();
+        assertEquals(rover2.getX(), 0);
+        assertEquals(rover2.getY(), 0);
+        mcc.clearRovers();
+    }
+
+    /* TODO 3) 5) Write a new test for a scenario where 2 rovers collide at the same position on the grid
+     *   and the second rover must pull back as a result
+     */
+    // TO DO 5 avec  deployAndMoveRover
+    @Test
+    public void testRoverPositionTakenBack() {
+        MissionCommandCenter mcc = MissionCommandCenter.getInstance();
+        Rover rover1 = new Rover(1, 0, 1, Orientation.N);
+        mcc.addRover(rover1);
+
+        Rover rover = mcc.deployAndMoveRover(2, "0 0 N", "MM");
+
+        assertEquals(rover.getY(), 0);
     }
 
     /* TODO 5) Write a new test for a scenario where a rover is created at an invalid position
      *   and is not deployed as a result
      */
+    @Test
+    public void testRoverNotDeployed() {
+        MissionCommandCenter mcc = MissionCommandCenter.getInstance();
+        Rover rover = new Rover(0, 0, 0, Orientation.N);
+        mcc.addRover(rover);
+
+        // Out of the grid
+        Rover rover2 = mcc.deployAndMoveRover(1, "2 2 N", "M");
+        assertNull(rover2);
+    }
 
     /**
      * Application must produce output data that matches the expected output after processing the input rover data.
