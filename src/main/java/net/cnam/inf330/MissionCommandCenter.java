@@ -148,6 +148,14 @@ public class MissionCommandCenter {
                     "Position out of grid ! Communication signal weak.");
 
         // TODO 2) Throw an InvalidRoverPositionException if there is another rover on the rover's current position.
+        for (Rover r : this.rovers) {
+            if (r.getId() != rover.getId()){
+                if ( r.getX() == rover.getX() && r.getY() == rover.getY()) {
+                    throw new InvalidRoverPositionException(rover,
+                            "Position already taken by another rover!");
+                }
+            }
+        }
     }
 
     /**
