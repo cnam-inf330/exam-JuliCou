@@ -122,6 +122,11 @@ public class RoverTest {
         List<String> expectedOutputLines = Main.readResourceFile("rover_test_output.txt");
 
         // TODO 7) Test that processing the input lines produces an output that matches the expected output lines
-        fail();
+        MissionCommandCenter mcc = MissionCommandCenter.getInstance();
+        List<String> outputLines = mcc.processRoverData(inputLines);
+
+        for (int i=0; i<outputLines.size(); i++){
+            assertEquals(outputLines.get(i), expectedOutputLines.get(i));
+        }
     }
 }
