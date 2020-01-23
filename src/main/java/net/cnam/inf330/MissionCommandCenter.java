@@ -124,6 +124,7 @@ public class MissionCommandCenter {
         } catch (InvalidRoverPositionException e) {
             // TODO 4) b) Don't deploy the rover if its initial position is invalid
             System.out.println("### WARNING : " + e.getMessage());
+            return null;
         }
 
         System.out.println("Controlling rover " + roverId + "...");
