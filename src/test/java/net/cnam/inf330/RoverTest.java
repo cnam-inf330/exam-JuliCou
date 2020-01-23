@@ -47,6 +47,19 @@ public class RoverTest {
      *   and the second rover must pull back as a result
      */
 
+    @Test
+    public void testRoverPositionTaken() {
+        // TO DO 3)
+        MissionCommandCenter mcc = MissionCommandCenter.getInstance();
+        Rover rover1 = new Rover(1, 0, 0, Orientation.N);
+        Rover rover2 = new Rover(2, 0, 0, Orientation.N);
+        mcc.addRover(rover1);
+        mcc.addRover(rover2);
+
+        ThrowingRunnable tr = () -> mcc.checkRoverPosition(rover2);
+        assertThrows(InvalidRoverPositionException.class, tr);
+    }
+
     /* TODO 5) Write a new test for a scenario where a rover is created at an invalid position
      *   and is not deployed as a result
      */
