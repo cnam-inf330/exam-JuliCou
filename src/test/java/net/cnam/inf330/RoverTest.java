@@ -40,7 +40,7 @@ public class RoverTest {
         ThrowingRunnable tr = () -> mcc.checkRoverPosition(rover);
         assertThrows(InvalidRoverPositionException.class, tr);
 
-        // Previous position
+        // Previous position TO DO 5 avec moveBackward
         rover.moveBackward();
         assertEquals(rover.getX(), 0);
         assertEquals(rover.getY(), 1);
@@ -54,7 +54,8 @@ public class RoverTest {
     public void testRoverOutOfGridExceptionBack() {
         MissionCommandCenter mcc = MissionCommandCenter.getInstance();
         Rover rover = mcc.deployAndMoveRover(1, "0 0 N", "MM");
-
+        // MM : y incrémenté de 1. Donc après MM, y=2. Mais en dehors
+        // de la grille. Donc y=1
         assertEquals(rover.getY(), 1);
 
         mcc.clearRovers();
@@ -77,14 +78,14 @@ public class RoverTest {
         ThrowingRunnable tr = () -> mcc.checkRoverPosition(rover2);
         assertThrows(InvalidRoverPositionException.class, tr);
 
-        // TO DO 5)
+        // TO DO 5) avec moveBackward
         rover2.moveBackward();
         assertEquals(rover2.getX(), 0);
         assertEquals(rover2.getY(), 0);
         mcc.clearRovers();
     }
 
-    /* TODO 3) 5) Write a new test for a scenario where 2 rovers collide at the same position on the grid
+    /* TODO 5) Write a new test for a scenario where 2 rovers collide at the same position on the grid
      *   and the second rover must pull back as a result
      */
     // TO DO 5 avec  deployAndMoveRover
