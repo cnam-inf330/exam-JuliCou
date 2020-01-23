@@ -20,6 +20,8 @@ public class RoverTest {
     @BeforeClass // This method is run only once, before the test methods are run
     public static void initMissionCommandCenter() {
         // TODO 1) Initialize MCC singleton instance before the test methods are run
+        MissionCommandCenter instanceMCC = MissionCommandCenter.getInstance(1,1);
+        System.out.println(instanceMCC);
     }
 
     /**
@@ -29,7 +31,7 @@ public class RoverTest {
     // TODO 5) Change this test to check that the rover pulls back after moving out of the grid
     @Test
     public void testRoverOutOfGridException() {
-        MissionCommandCenter mcc = new MissionCommandCenter(1, 1);
+        MissionCommandCenter mcc = MissionCommandCenter.getInstance();
         Rover rover = new Rover(1, 0, 0, Orientation.N);
         mcc.addRover(rover);
         rover.moveForward();

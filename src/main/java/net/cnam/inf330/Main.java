@@ -21,7 +21,7 @@ public class Main {
      */
     public static void main(String[] args) throws IOException, URISyntaxException {
         List<String> lines = Main.readResourceFile("rover_data.txt");
-        MissionCommandCenter mcc = new MissionCommandCenter();
+        MissionCommandCenter mcc = MissionCommandCenter.getInstance(1, 1);
         List<String> outputLines = mcc.processRoverData(lines);
 
         System.out.println("\n===========");

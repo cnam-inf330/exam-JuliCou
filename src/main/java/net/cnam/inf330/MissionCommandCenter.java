@@ -6,6 +6,9 @@ import java.util.*;
  * Class for managing the rovers that are deployed on the Mars exploration grid.
  */
 public class MissionCommandCenter {
+    // Singleton
+    private static volatile MissionCommandCenter instance = null;
+
     private int gridWidth;
     private int gridHeight;
     private List<Rover> rovers;
@@ -15,7 +18,7 @@ public class MissionCommandCenter {
     /**
      * Create a MCC without a predefined grid size.
      */
-    public MissionCommandCenter() {
+    private MissionCommandCenter() {
         this.gridWidth = -1;
         this.gridHeight = -1;
         this.rovers = new ArrayList<>();
@@ -27,10 +30,34 @@ public class MissionCommandCenter {
      * @param gridWidth  The width (X axis) of the exploration grid
      * @param gridHeight The height (Y axis) of the exploration grid
      */
-    public MissionCommandCenter(int gridWidth, int gridHeight) {
+    private MissionCommandCenter(int gridWidth, int gridHeight) {
         this.gridWidth = gridWidth;
         this.gridHeight = gridHeight;
         this.rovers = new ArrayList<>();
+    }
+
+    // TO DO 1
+    public static MissionCommandCenter getInstance() {
+        if (instance == null) {
+            synchronized (MissionCommandCenter.class) {
+                if (instance == null) {
+                    instance = new MissionCommandCenter();
+                }
+            }
+        }
+        return instance;
+    }
+
+    // TO DO 1
+    public static MissionCommandCenter getInstance(int gridWidth, int gridHeight) {
+        if (instance == null) {
+            synchronized (MissionCommandCenter.class) {
+                if (instance == null) {
+                    instance = new MissionCommandCenter(gridWidth, gridHeight);
+                }
+            }
+        }
+        return instance;
     }
 
     /**
