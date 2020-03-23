@@ -20,6 +20,7 @@ public class RoverTest {
     @BeforeClass // This method is run only once, before the test methods are run
     public static void initMissionCommandCenter() {
         // TODO 1) Initialize MCC singleton instance before the test methods are run
+        // FIXME The idea was to store the instance in a member variable
         MissionCommandCenter instanceMCC = MissionCommandCenter.getInstance(1,1);
         System.out.println(instanceMCC);
     }
@@ -41,7 +42,7 @@ public class RoverTest {
         assertThrows(InvalidRoverPositionException.class, tr);
 
         // Previous position TO DO 5 avec moveBackward
-        rover.moveBackward();
+        rover.moveBackward(); // FIXME Should have called the moveRover method to test expected behaviour
         assertEquals(rover.getX(), 0);
         assertEquals(rover.getY(), 1);
 
@@ -79,7 +80,7 @@ public class RoverTest {
         assertThrows(InvalidRoverPositionException.class, tr);
 
         // TO DO 5) avec moveBackward
-        rover2.moveBackward();
+        rover2.moveBackward(); // FIXME Should have called the moveRover method to test expected behaviour
         assertEquals(rover2.getX(), 0);
         assertEquals(rover2.getY(), 0);
         mcc.clearRovers();
@@ -126,6 +127,7 @@ public class RoverTest {
         MissionCommandCenter mcc = MissionCommandCenter.getInstance();
         List<String> outputLines = mcc.processRoverData(inputLines);
 
+        // FIXME Do this with only 1 assert and without the for loop
         for (int i=0; i<outputLines.size(); i++){
             assertEquals(outputLines.get(i), expectedOutputLines.get(i));
         }

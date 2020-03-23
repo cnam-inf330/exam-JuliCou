@@ -85,6 +85,7 @@ public class MissionCommandCenter {
             String roverInstructionsData = it.next();
 
             Rover rover = deployAndMoveRover(currentRoverId, roverInitialStateData, roverInstructionsData);
+            // FIXME What happens if rover is null ? => NPE
             rovers.add(rover);
             System.out.println("Rover " + currentRoverId + "'s final state : " + rover);
 
